@@ -1,127 +1,20 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neptune Panel</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/motion@latest/dist/motion.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            background-color: #000000;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-            font-family: 'Roboto Flex', sans-serif;
-        }
-
-        .container {
-            text-align: center;
-            position: relative;
-        }
-
-        .title {
-            font-size: 5.5rem;
-            font-weight: 400;
-            letter-spacing: 3px;
-            color: #fe96f5;
-            cursor: default;
-        }
-
-        .letter {
-            display: inline-block;
-            transition: font-variation-settings 0.3s ease;
-            font-variation-settings: 'wght' 400, 'wdth' 100;
-        }
-
-        .space {
-            display: inline-block;
-            width: 20px;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
-        <h1 class="title" id="title">
-            <!-- Huruf akan diisi JavaScript -->
-        </h1>
+        <div id="neptune-text"></div>
+        <p class="subtitle">Interactive variable font demo</p>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const text = "Neptune Panel";
-            const title = document.getElementById('title');
-            const letters = [];
-            
-            // Membuat huruf per huruf
-            for (let i = 0; i < text.length; i++) {
-                const char = text[i];
-                
-                if (char === ' ') {
-                    const space = document.createElement('span');
-                    space.className = 'space';
-                    title.appendChild(space);
-                    continue;
-                }
-                
-                const letter = document.createElement('span');
-                letter.className = 'letter';
-                letter.textContent = char;
-                letter.style.fontVariationSettings = "'wght' 400, 'wdth' 100";
-                
-                title.appendChild(letter);
-                letters.push({
-                    element: letter,
-                    x: 0,
-                    y: 0
-                });
-            }
-            
-            // Update posisi huruf
-            function updatePositions() {
-                letters.forEach(letter => {
-                    const rect = letter.element.getBoundingClientRect();
-                    letter.x = rect.left + rect.width / 2;
-                    letter.y = rect.top + rect.height / 2;
-                });
-            }
-            
-            // Efek saat mouse bergerak
-            document.addEventListener('mousemove', (e) => {
-                const mouseX = e.clientX;
-                const mouseY = e.clientY;
-                
-                letters.forEach(letter => {
-                    const dx = mouseX - letter.x;
-                    const dy = mouseY - letter.y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    
-                    // Radius efek
-                    const radius = 100;
-                    
-                    if (distance < radius) {
-                        const influence = 1 - (distance / radius);
-                        const weight = 400 + (300 * influence); // 400 → 700
-                        const width = 100 + (30 * influence); // 100 → 130
-                        
-                        letter.element.style.fontVariationSettings = `'wght' ${weight}, 'wdth' ${width}`;
-                    } else {
-                        letter.element.style.fontVariationSettings = "'wght' 400, 'wdth' 100";
-                    }
-                });
-            });
-            
-            // Inisialisasi
-            setTimeout(updatePositions, 100);
-            window.addEventListener('resize', updatePositions);
-        });
-    </script>
+    
+    <script type="module" src="script.js"></script>
 </body>
 </html>
