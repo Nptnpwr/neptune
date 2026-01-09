@@ -4,81 +4,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neptune Panel</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .neptune-text {
+            font-size: 4.5rem;
+            font-weight: 800;
+            letter-spacing: 4px;
+            position: relative;
+            padding: 20px;
+        }
+        
+        .neptune-text::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            height: 120%;
+            background: radial-gradient(
+                circle,
+                rgba(254, 150, 245, 0.1) 0%,
+                transparent 70%
+            );
+            z-index: -1;
+            animation: pulse 4s infinite ease-in-out;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.3;
+                transform: translate(-50%, -50%) scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Background Elements -->
-    <div class="bg-blob pink-blob"></div>
-    <div class="bg-blob black-blob"></div>
-    
-    <!-- Main Container -->
-    <div class="container">
-        <!-- Header/Navigation -->
-        <header class="header">
-            <nav class="navbar">
-                <div class="logo">
-                    <i class="fas fa-infinity"></i>
-                    <span>Neptune</span>
-                </div>
-                <div class="nav-links">
-                    <a href="#" class="nav-link active">Home</a>
-                    <a href="#" class="nav-link">Dashboard</a>
-                    <a href="#" class="nav-link">Analytics</a>
-                    <a href="#" class="nav-link">Settings</a>
-                </div>
-                <button class="menu-btn">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </nav>
-        </header>
-
-        <!-- Main Hero Section -->
-        <main class="main-content">
-            <div class="hero">
-                <div class="title-container">
-                    <h1 class="main-title">Neptune Panel</h1>
-                    <div class="subtitle">
-                        <div class="line"></div>
-                        <p class="tagline">Elegant Control Panel with Modern Design</p>
-                        <div class="line"></div>
-                    </div>
-                </div>
-                
-                <!-- Decorative Elements -->
-                <div class="floating-elements">
-                    <div class="floating-circle circle-1"></div>
-                    <div class="floating-circle circle-2"></div>
-                    <div class="floating-circle circle-3"></div>
-                </div>
-                
-                <!-- CTA Button -->
-                <div class="cta-container">
-                    <button class="cta-btn">
-                        <i class="fas fa-rocket"></i>
-                        <span>Launch Dashboard</span>
-                    </button>
-                    <button class="secondary-btn">
-                        <i class="fas fa-play-circle"></i>
-                        <span>Watch Demo</span>
-                    </button>
-                </div>
-            </div>
-        </main>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-content">
-                <p>© 2024 Neptune Panel. All rights reserved.</p>
-                <div class="social-icons">
-                    <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-discord"></i></a>
-                </div>
-            </div>
-        </footer>
+    <div class="neptune-text">
+        Neptune Panel
     </div>
-
-    <script src="script.js"></script>
 </body>
 </html>
