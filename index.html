@@ -5,62 +5,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neptune Panel</title>
     <style>
+        /* Reset dasar */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
+        /* Background hitam gelap */
         body {
-            background-color: #0a0a0a;
-            color: #ffffff;
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #000000;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
         }
-        
+
+        /* Container untuk teks */
+        .text-container {
+            text-align: center;
+        }
+
+        /* Styling teks "Neptune Panel" */
         .neptune-text {
-            font-size: 4.5rem;
-            font-weight: 800;
-            letter-spacing: 4px;
-            position: relative;
-            padding: 20px;
-        }
-        
-        .neptune-text::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 120%;
-            height: 120%;
-            background: radial-gradient(
-                circle,
-                rgba(254, 150, 245, 0.1) 0%,
-                transparent 70%
-            );
-            z-index: -1;
-            animation: pulse 4s infinite ease-in-out;
-        }
-        
-        @keyframes pulse {
-            0%, 100% {
-                opacity: 0.3;
-                transform: translate(-50%, -50%) scale(1);
-            }
-            50% {
-                opacity: 0.5;
-                transform: translate(-50%, -50%) scale(1.1);
-            }
+            color: #ffffff;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 5rem;
+            font-weight: bold;
+            letter-spacing: 3px;
         }
     </style>
 </head>
 <body>
-    <div class="neptune-text">
-        Neptune Panel
+    <div class="text-container">
+        <h1 class="neptune-text">Neptune Panel</h1>
     </div>
 </body>
 </html>
