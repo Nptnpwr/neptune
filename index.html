@@ -4,41 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neptune Panel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <style>
-        /* Reset dasar */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        /* Background hitam gelap */
         body {
             background-color: #000000;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            cursor: none;
+            overflow: hidden;
         }
 
-        /* Container untuk teks */
         .text-container {
             text-align: center;
+            position: relative;
         }
 
-        /* Styling teks "Neptune Panel" */
         .neptune-text {
-            color: #ffffff;
-            font-family: 'Segoe UI', Arial, sans-serif;
-            font-size: 5rem;
-            font-weight: bold;
-            letter-spacing: 3px;
+            font-family: 'Roboto Flex', sans-serif;
+            font-size: 5.5rem;
+            font-weight: 400;
+            letter-spacing: 4px;
+            color: #fe96f5;
+            position: relative;
+            z-index: 2;
+        }
+
+        .letter {
+            display: inline-block;
+            transition: all 0.2s ease;
+            font-variation-settings: 'wght' 400, 'wdth' 100;
+        }
+
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: rgba(254, 150, 245, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            mix-blend-mode: screen;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-dot {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fe96f5;
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #fe96f5;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
         }
     </style>
 </head>
 <body>
-    <div class="text-container">
-        <h1 class="neptune-text">Neptune Panel</h1>
+    <!-- Custom cursor -->
+    <div class="cursor">
+        <div class="cursor-dot"></div>
     </div>
+
+    <!-- Text container -->
+    <div class="text-container">
+        <h1 class="neptune-text" id="animated-text">
+            <!-- Letters will be inserted by JavaScript -->
+        </h1>
+    </div>
+
+    <!-- Particles container -->
+    <div id="particles-container"></div>
+
+    <script src="script.js"></script>
 </body>
 </html>
