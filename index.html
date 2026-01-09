@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Neptune Panel</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
     <style>
         * {
             margin: 0;
@@ -19,81 +18,110 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            cursor: none;
             overflow: hidden;
+            font-family: 'Roboto Flex', sans-serif;
         }
 
-        .text-container {
+        .container {
             text-align: center;
             position: relative;
         }
 
-        .neptune-text {
-            font-family: 'Roboto Flex', sans-serif;
+        .title {
             font-size: 5.5rem;
             font-weight: 400;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             color: #fe96f5;
-            position: relative;
-            z-index: 2;
+            cursor: default;
         }
 
         .letter {
             display: inline-block;
-            transition: all 0.2s ease;
+            transition: font-variation-settings 0.3s ease;
             font-variation-settings: 'wght' 400, 'wdth' 100;
         }
 
-        .cursor {
-            position: fixed;
+        .space {
+            display: inline-block;
             width: 20px;
-            height: 20px;
-            background: rgba(254, 150, 245, 0.3);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 1;
-            mix-blend-mode: screen;
-            transform: translate(-50%, -50%);
-        }
-
-        .cursor-dot {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: #fe96f5;
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: #fe96f5;
-            border-radius: 50%;
-            pointer-events: none;
-            opacity: 0;
         }
     </style>
 </head>
 <body>
-    <!-- Custom cursor -->
-    <div class="cursor">
-        <div class="cursor-dot"></div>
-    </div>
-
-    <!-- Text container -->
-    <div class="text-container">
-        <h1 class="neptune-text" id="animated-text">
-            <!-- Letters will be inserted by JavaScript -->
+    <div class="container">
+        <h1 class="title" id="title">
+            <!-- Huruf akan diisi JavaScript -->
         </h1>
     </div>
 
-    <!-- Particles container -->
-    <div id="particles-container"></div>
-
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const text = "Neptune Panel";
+            const title = document.getElementById('title');
+            const letters = [];
+            
+            // Membuat huruf per huruf
+            for (let i = 0; i < text.length; i++) {
+                const char = text[i];
+                
+                if (char === ' ') {
+                    const space = document.createElement('span');
+                    space.className = 'space';
+                    title.appendChild(space);
+                    continue;
+                }
+                
+                const letter = document.createElement('span');
+                letter.className = 'letter';
+                letter.textContent = char;
+                letter.style.fontVariationSettings = "'wght' 400, 'wdth' 100";
+                
+                title.appendChild(letter);
+                letters.push({
+                    element: letter,
+                    x: 0,
+                    y: 0
+                });
+            }
+            
+            // Update posisi huruf
+            function updatePositions() {
+                letters.forEach(letter => {
+                    const rect = letter.element.getBoundingClientRect();
+                    letter.x = rect.left + rect.width / 2;
+                    letter.y = rect.top + rect.height / 2;
+                });
+            }
+            
+            // Efek saat mouse bergerak
+            document.addEventListener('mousemove', (e) => {
+                const mouseX = e.clientX;
+                const mouseY = e.clientY;
+                
+                letters.forEach(letter => {
+                    const dx = mouseX - letter.x;
+                    const dy = mouseY - letter.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    // Radius efek
+                    const radius = 100;
+                    
+                    if (distance < radius) {
+                        const influence = 1 - (distance / radius);
+                        const weight = 400 + (300 * influence); // 400 → 700
+                        const width = 100 + (30 * influence); // 100 → 130
+                        
+                        letter.element.style.fontVariationSettings = `'wght' ${weight}, 'wdth' ${width}`;
+                    } else {
+                        letter.element.style.fontVariationSettings = "'wght' 400, 'wdth' 100";
+                    }
+                });
+            });
+            
+            // Inisialisasi
+            setTimeout(updatePositions, 100);
+            window.addEventListener('resize', updatePositions);
+        });
+    </script>
 </body>
 </html>
