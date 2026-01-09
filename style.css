@@ -1,0 +1,35 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Smooth animations */
+.letter {
+    will-change: font-variation-settings, transform;
+    backface-visibility: hidden;
+}
+
+/* Glow effect for text */
+.neptune-text {
+    text-shadow: 
+        0 0 10px rgba(254, 150, 245, 0.3),
+        0 0 20px rgba(254, 150, 245, 0.2),
+        0 0 30px rgba(254, 150, 245, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .neptune-text {
+        font-size: 3.5rem;
+        letter-spacing: 2px;
+    }
+}
+
+@media (max-width: 480px) {
+    .neptune-text {
+        font-size: 2.5rem;
+        letter-spacing: 1px;
+    }
+}
